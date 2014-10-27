@@ -25,7 +25,7 @@ class ShareViewController: SLComposeServiceViewController {
   // The URL we're uploading to.
   // NOTE: This almost certainly _won't_ work for you. Create your own request bin
   //       at http://requestb.in/ and substitute that URL here.
-  let sc_uploadURL = "http://requestb.in/ykc1ipyk"
+  let sc_uploadURL = "http://requestb.in/1l8jlzs1"
   let sc_maxCharactersAllowed = 25
   
   var attachedImage: UIImage?
@@ -86,8 +86,8 @@ class ShareViewController: SLComposeServiceViewController {
   
   
   func urlRequestWithImage(image: UIImage?, text: String) -> NSURLRequest? {
-    let url = NSURL.URLWithString(sc_uploadURL)
-    let request = NSMutableURLRequest(URL: url)
+    let url = NSURL(string:sc_uploadURL)
+    let request = NSMutableURLRequest(URL: url!)
     request.addValue("application/json", forHTTPHeaderField: "Content-Type")
     request.addValue("application/json", forHTTPHeaderField: "Accept")
     request.HTTPMethod = "POST"
@@ -116,7 +116,7 @@ class ShareViewController: SLComposeServiceViewController {
     var resultDict = NSMutableDictionary()
     resultDict["height"] = image.size.height
     resultDict["width"] = image.size.width
-    resultDict["orientation"] = image.imageOrientation.toRaw()
+    resultDict["orientation"] = image.imageOrientation.rawValue
     resultDict["scale"] = image.scale
     resultDict["description"] = image.description
     return resultDict.copy() as NSDictionary
